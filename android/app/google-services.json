@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "794066304083",
+    "project_id": "briz-59ee3",
+    "storage_bucket": "briz-59ee3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794066304083:android:82505904e0411d5ae5daa6",
+        "android_client_info": {
+          "package_name": "com.briz.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "794066304083-cueg69abg5sa1rp9jl2ftbv0jj8ih6vk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkgG_IPrU7mMShQ6f_y4HBO7hz6i20rD4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "794066304083-cueg69abg5sa1rp9jl2ftbv0jj8ih6vk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,68 @@
+class MyImage extends ExtendedImage {
+  
+}
+
+// 
+                    // titlePadding: const EdgeInsets.only(top: 25.0),
+
+
+                     // Align(
+              //   alignment: Alignment.bottomLeft,
+              //   child: Padding(
+              //     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              //     child: CircleAvatar(
+              //       backgroundColor: Colors.black,
+              //       radius: 20.0,
+              //     ),
+              //   ),
+              // ),
+              // Container(
+              //   alignment: Alignment.bottomCenter,
+              //   child: Container(
+              //     color: Colors.amber,
+              //     height: 30,
+              //     child: Row(
+              //       mainAxisSize: MainAxisSize.max,
+              //       mainAxisAlignment: MainAxisAlignment.end,
+              //       crossAxisAlignment: CrossAxisAlignment.end,
+              //       children: [const Text('Hi!')],
+              //     ),
+              //   ),
+              // ),
+
+              // Container(
+              //   // color: Colors.black.withOpacity(0.6),
+              //   color: Colors.teal,
+              //   height: 30,
+              //   alignment: Alignment.bottomRight,
+              //   child: Padding(padding: const EdgeInsets.all(1.0), child: Text('HI')
+              //
+              //       ),
+              // ),
+
+              // background: ExtendedImage.network(
+                    //   widget.settings.imageSettings.path,
+                    //   fit: widget.settings.imageSettings.fit,
+                    //   color: widget.settings.imageSettings.color.withOpacity(widget.settings.imageSettings.opacity),
+                    //   colorBlendMode: BlendMode.modulate,
+                    //   enableLoadState: true,
+                    //   cache: true,
+                    //   loadStateChanged: (ExtendedImageState state) {
+                    //     switch (state.extendedImageLoadState) {
+                    //       case LoadState.loading:
+                    //         return SpinKitRipple(
+                    //           color: Theme.of(context).primaryColor,
+                    //         );
+                    //       case LoadState.failed:
+                    //         return Image.asset(
+                    //           kDefaultAppBarImagePath,
+                    //           fit: widget.settings.imageSettings.fit,
+                    //           color: widget.settings.imageSettings.color.withOpacity(widget.settings.imageSettings.opacity),
+                    //           colorBlendMode: BlendMode.modulate,
+                    //         );
+                    //       case LoadState.completed:
+                    //         return state.completedWidget;
+                    //     }
+                    //   },
+                    // ),
+                    
