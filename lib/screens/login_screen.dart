@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:briz/components/flupp/flupp_scaffold.dart';
 import 'package:briz/components/flupp/flupp_sliverappbar.dart';
+import 'package:briz/constants.dart';
 import 'package:briz/screens/profile_screen.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:briz/services/userprofile_service.dart';
@@ -44,8 +45,10 @@ class _LoginScreenState extends State<LoginScreen> {
     return FluppScaffold(
       screenIndex: 1,
       settings: const FluppScaffoldSettings(
-        appBarSettings: FluppSliverAppBarSettings(title: FluppSliverAppBarTitleSettings(text: "Briz")),
-      ),
+          appBar: FluppSliverAppBarSettings(
+            title: FluppSliverAppBarTitleSettings(text: "Briz"),
+          ),
+          bottomNavigation: Constants.bottomNavBarSettings),
       slivers: [
         SliverToBoxAdapter(
           child: Center(

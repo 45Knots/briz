@@ -16,6 +16,7 @@ class FluppSliverAppBarSettings {
     this.title = const FluppSliverAppBarTitleSettings(),
     this.image = const FluppSliverAppBarImageSettings(),
     this.avatar = const FluppSliverAppBarAvatarSettings(),
+    this.info = const FluppSliverAppBarInfoSettings(),
   });
 
   final bool isCollaped;
@@ -31,6 +32,5 @@ class FluppSliverAppBarSettings {
   final FluppSliverAppBarTitleSettings title;
   final FluppSliverAppBarImageSettings image;
   final FluppSliverAppBarAvatarSettings avatar;
-
-  // static const MySliverAppBarSettings defaultSettings = MySliverAppBarSettings();
+  final FluppSliverAppBarInfoSettings info;
 }

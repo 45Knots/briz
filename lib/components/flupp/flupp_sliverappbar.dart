@@ -1,13 +1,14 @@
-import 'package:briz/components/scroll_effects.dart';
-import 'package:briz/components/my_avatar.dart';
+import 'package:briz/components/generic/network_or_asset_image.dart';
+import 'package:briz/components/generic/scroll_effects.dart';
+import 'package:briz/components/generic/network_or_asset_avatar.dart';
 import 'package:briz/constants.dart';
-import 'package:extended_image/extended_image.dart';
 import "package:flutter/material.dart";
 import 'package:sliver_tools/sliver_tools.dart';
 
 part 'flupp_sliverappbar.settings.title.dart';
 part 'flupp_sliverappbar.settings.image.dart';
 part 'flupp_sliverappbar.settings.avatar.dart';
+part 'flupp_sliverappbar.settings.infobar.dart';
 part 'flupp_sliverappbar.settings.dart';
 part 'flupp_sliverappbar.NOTUSED.title.dart';
 
@@ -29,7 +30,6 @@ class _FluppSliverAppBarState extends State<FluppSliverAppBar> {
   Widget build(BuildContext context) {
     Widget _appBar = SliverAppBar(
       pinned: widget.settings.pinned,
-      // pinned: false,
       snap: widget.settings.snap,
       floating: widget.settings.floating,
       expandedHeight: (widget.settings.isCollaped ? widget.settings.collapsedHeight : widget.settings.expandedHeight),
@@ -51,8 +51,12 @@ class _FluppSliverAppBarState extends State<FluppSliverAppBar> {
                     : EdgeInsets.zero,
             centerTitle: false,
             expandedTitleScale: widget.settings.scale,
-            background: MyImage(
-              settings: widget.settings.image,
+            background: NetworkOrAssetImage(
+              imagePathOrUrl: widget.settings.image.path,
+              color: widget.settings.image.color,
+              fit: widget.settings.image.fit,
+              opacity: widget.settings.image.opacity,
+              fallBackImagePath: Constants.defaultAppBarImagePath,
             ),
             title: SizedBox(
               height: (height / widget.settings.scale) * 0.25,
@@ -69,107 +73,45 @@ class _FluppSliverAppBarState extends State<FluppSliverAppBar> {
       ),
     );
 
-    var avatar = SliverPositioned(
-        bottom: -25,
-        left: 10,
-        child: ScrollEffects(
-          fadeEffect: EffectParameters(
-            startAtOffset: 0,
-            stopAtOffset: widget.settings.expandedHeight - widget.settings.collapsedHeight,
-          ),
-          scaleEffect: ScaleEffectParameters(
-            alignment: Alignment.centerLeft,
-            startAtOffset: 0,
-            stopAtOffset: widget.settings.expandedHeight - widget.settings.collapsedHeight,
-            scaleFactor: 1.5,
-            type: ScaleType.shrink,
-          ),
-          scrollController: widget.scrollController,
-          child: MyAvatar(
-            imageUrl: widget.settings.image.path,
+    Widget avatar = SliverPositioned(
+        bottom: -40,
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Align(
+            alignment: widget.settings.avatar.alignment,
+            child: ScrollEffects(
+              fadeEffect: EffectParameters(
+                startAtOffset: 0,
+                stopAtOffset: widget.settings.expandedHeight - widget.settings.collapsedHeight,
+              ),
+              scaleEffect: ScaleEffectParameters(
+                alignment: widget.settings.avatar.alignment,
+                startAtOffset: 0,
+                stopAtOffset: widget.settings.expandedHeight - widget.settings.collapsedHeight,
+                scaleFactor: 1.5,
+                type: ScaleType.shrink,
+              ),
+              scrollController: widget.scrollController,
+              child: NetworkOrAssetAvatar(
+                imagePathOrUrl: widget.settings.avatar.imageUrlOrPath,
+              ),
+            ),
           ),
         ));
 
-    return MultiSliver(children: [
-      SliverStack(children: [SliverPositioned.fill(child: _appBar), avatar]),
-      _ss
-    ]);
-  }
-}
-
-var _ss = SliverPinnedHeader(child: _info);
-
-var _info = MyInfoBar2();
-
-class MyInfoBar2 extends StatelessWidget {
-  const MyInfoBar2({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.all(8),
-            height: 40,
-            color: Theme.of(context).backgroundColor,
-            child: Text('BBBBBB'),
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.all(8),
-          height: 40,
-          color: Theme.of(context).backgroundColor,
-          child: Text('AAAAAAA'),
-        ),
-      ],
+    Widget _infoBar = AppBar(
+      automaticallyImplyLeading: false,
+      toolbarHeight: kToolbarHeight / 2,
+      backgroundColor: Theme.of(context).canvasColor,
+      elevation: 0,
     );
-  }
-}
 
-class MyImage extends StatefulWidget {
-  const MyImage({Key? key, this.settings = const FluppSliverAppBarImageSettings()}) : super(key: key);
-
-  final FluppSliverAppBarImageSettings settings;
-  @override
-  State<MyImage> createState() => _MyImageState();
-}
-
-class _MyImageState extends State<MyImage> {
-  @override
-  Widget build(BuildContext context) {
-    return widget.settings.path.startsWith('assets/')
-        ? Image.asset(
-            widget.settings.path,
-            fit: widget.settings.fit,
-            color: widget.settings.color.withOpacity(widget.settings.opacity),
-            colorBlendMode: BlendMode.modulate,
-          )
-        : ExtendedImage.network(
-            widget.settings.path,
-            fit: widget.settings.fit,
-            color: widget.settings.color.withOpacity(widget.settings.opacity),
-            colorBlendMode: BlendMode.modulate,
-            enableLoadState: true,
-            cache: true,
-            loadStateChanged: (ExtendedImageState state) {
-              switch (state.extendedImageLoadState) {
-                case LoadState.loading:
-                case LoadState.failed:
-                  return Image.asset(
-                    kDefaultAppBarImagePath,
-                    fit: widget.settings.fit,
-                    color: widget.settings.color.withOpacity(widget.settings.opacity),
-                    colorBlendMode: BlendMode.modulate,
-                  );
-                case LoadState.completed:
-                  return state.completedWidget;
-              }
-            },
-          );
+    List<Widget> _children = List<Widget>.empty(growable: true);
+    _children.add(widget.settings.avatar.show ? SliverStack(children: [SliverPositioned.fill(child: _appBar), avatar]) : _appBar);
+    if (widget.settings.info.show) {
+      _children.add(_infoBar);
+    }
+    return MultiSliver(children: _children);
   }
 }

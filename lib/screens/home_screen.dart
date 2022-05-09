@@ -2,6 +2,7 @@ import 'package:briz/components/cruiser_card.dart';
 import 'package:briz/components/flupp/flupp_scaffold.dart';
 import 'package:briz/components/flupp/flupp_sliverappbar.dart';
 import 'package:briz/components/my_sliver_with_header.dart';
+import 'package:briz/constants.dart';
 import 'package:briz/models/cruiser.dart';
 import 'package:briz/services/cruiser_service.dart';
 import 'package:flutter/material.dart';
@@ -20,12 +21,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return const FluppScaffold(
         screenIndex: 0,
         settings: FluppScaffoldSettings(
-          appBarSettings: FluppSliverAppBarSettings(
-            title: FluppSliverAppBarTitleSettings(
-              text: "Briz",
+            appBar: FluppSliverAppBarSettings(
+              title: FluppSliverAppBarTitleSettings(
+                text: "Briz",
+              ),
             ),
-          ),
-        ),
+            bottomNavigation: Constants.bottomNavBarSettings),
         slivers: [CruiserList()]);
   }
 }
@@ -39,7 +40,7 @@ class CruiserList extends StatelessWidget {
   Widget build(BuildContext context) {
     return MySliverWithHeader(
       title: "Cruises near me",
-      sticky: true,
+      sticky: false,
       sliver: FutureBuilder<List<Cruiser>>(
         future: CruiserService.readAll(),
         builder: (context, snapshot) {

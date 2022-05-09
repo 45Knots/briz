@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
-import '../components/dummy_sliver_list.dart';
+import '../components/generic/dummy_sliver_list.dart';
 
 class CruiserScreenArguments {
   final Cruiser cruiser;
@@ -32,19 +32,25 @@ class _CruiserScreenState extends State<CruiserScreen> {
     return FluppScaffold(
       screenIndex: -1,
       settings: FluppScaffoldSettings(
-        appBarSettings: FluppSliverAppBarSettings(
-          title: FluppSliverAppBarTitleSettings(
-            text: widget.arguments.cruiser.title,
-            textStyle: kListCardTextStyle,
-            alignment: Alignment.bottomCenter,
-          ),
-          image: FluppSliverAppBarImageSettings(
-            fit: BoxFit.cover,
-            path: widget.arguments.cruiser.defaultImage,
-            opacity: 1.0,
-          ),
-        ),
-      ),
+          appBar: FluppSliverAppBarSettings(
+              title: FluppSliverAppBarTitleSettings(
+                text: widget.arguments.cruiser.title,
+                textStyle: kListCardTextStyle,
+                alignment: Alignment.bottomCenter,
+              ),
+              image: FluppSliverAppBarImageSettings(
+                fit: BoxFit.cover,
+                path: widget.arguments.cruiser.defaultImage,
+                opacity: 1.0,
+              ),
+              avatar: const FluppSliverAppBarAvatarSettings(
+                alignment: Alignment.bottomLeft,
+                show: true,
+              ),
+              info: const FluppSliverAppBarInfoSettings(
+                show: true,
+              )),
+          bottomNavigation: Constants.bottomNavBarSettings),
       slivers: [
         SliverToBoxAdapter(
           child: Column(

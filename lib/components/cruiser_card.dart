@@ -14,11 +14,11 @@ class CruiserListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
+      padding: const EdgeInsets.all(10.0),
       child: InkWell(
         child: Container(
           width: double.infinity,
-          height: 250.0,
+          height: 200.0,
           alignment: Alignment.bottomLeft,
           decoration: CardBoxDecoration(imagePath: cruiser.defaultImage),
           child: Container(

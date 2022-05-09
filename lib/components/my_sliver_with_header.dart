@@ -20,7 +20,7 @@ class MySliverWithHeader extends StatelessWidget {
       header: MyListHeader(
         title: title,
       ),
-      sticky: true,
+      sticky: sticky,
       sliver: sliver,
     );
   }

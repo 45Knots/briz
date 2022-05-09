@@ -15,10 +15,10 @@ class MyListHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 20.0, left: 10.0, bottom: 10.0),
-      decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
+      decoration: BoxDecoration(color: Theme.of(context).canvasColor),
       child: Text(
         title,
-        style: kListTitleTextStyle,
+        style: Theme.of(context).textTheme.headlineSmall,
         textAlign: alignment,
       ),
     );

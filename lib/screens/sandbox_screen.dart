@@ -1,5 +1,6 @@
+import 'package:briz/constants.dart';
 import 'package:flutter/material.dart';
-import '../components/dummy_sliver_list.dart';
+import '../components/generic/dummy_sliver_list.dart';
 import '../components/flupp/flupp_scaffold.dart';
 
 class SandboxScreen extends StatefulWidget {
@@ -15,6 +16,9 @@ class _SandboxScreenState extends State<SandboxScreen> {
   @override
   Widget build(BuildContext context) {
     return const FluppScaffold(
+      settings: FluppScaffoldSettings(
+        bottomNavigation: Constants.bottomNavBarSettings,
+      ),
       screenIndex: 2,
       slivers: [
         // SliverToBoxAdapter(

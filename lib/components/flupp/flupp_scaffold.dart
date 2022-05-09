@@ -43,63 +43,92 @@ class _FluppScaffoldState extends State<FluppScaffold> {
         controller: _scrollController,
         slivers: widget.settings.showAppBar
             ? [
-                FluppSliverAppBar(scrollController: _scrollController, settings: widget.settings.appBarSettings),
+                FluppSliverAppBar(
+                  scrollController: _scrollController,
+                  settings: widget.settings.appBar,
+                ),
                 ...widget.slivers,
               ]
             : widget.slivers,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: widget.screenIndex > -1 ? widget.screenIndex : 0, // this will be set when a new tab is tapped
-        elevation: 30,
-        onTap: (index) {
-          if (widget.screenIndex != index) {
-            switch (index) {
-              case 0:
-                {
-                  Navigator.of(context).pushNamed(HomeScreen.routeId);
+          currentIndex: widget.screenIndex > -1 ? widget.screenIndex : 0, // this will be set when a new tab is tapped
+          elevation: 30,
+          onTap: (index) {
+            String? currentRoute = ModalRoute.of(context)?.settings.name;
+            if (currentRoute == null || currentRoute != widget.settings.bottomNavigation.buttons[index].targetRoute) {
+              String targetRoute = widget.settings.bottomNavigation.buttons[index].targetRoute;
+              if (widget.settings.bottomNavigation.buttons[index].nonAuthenticatedTargetRoute != null) {
+                var userProfileService = Provider.of<UserProfileService>(context, listen: false);
+                if (userProfileService.currentUser == null) {
+                  targetRoute = widget.settings.bottomNavigation.buttons[index].nonAuthenticatedTargetRoute!;
                 }
-                break;
-              case 1:
-                {
-                  var userProfileService = Provider.of<UserProfileService>(context, listen: false);
-                  if (userProfileService.currentUser == null) {
-                    Navigator.of(context).pushNamed(LoginScreen.routeId);
-                  } else {
-                    Navigator.of(context).pushNamed(ProfileScreen.routeId);
-                  }
-                }
-                break;
-              case 2:
-                {
-                  Navigator.of(context).pushNamed(SandboxScreen.routeId);
-                }
+              }
+
+              if (widget.settings.bottomNavigation.buttons[index].shoudlReplaceRoute) {
+                Navigator.of(context).pushReplacementNamed(targetRoute);
+              } else {
+                Navigator.of(context).pushNamed(targetRoute);
+              }
             }
-          }
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: widget.screenIndex == 0 ? Colors.red : Colors.blue,
-            ),
-            label: 'Home',
+
+            //  if (widget.screenIndex != index) {
+            //   switch (index) {
+            //     case 0:
+            //       {
+            //         Navigator.of(context).pushNamed(HomeScreen.routeId);
+            //       }
+            //       break;
+            //     case 1:
+            //       {
+            //         var userProfileService = Provider.of<UserProfileService>(context, listen: false);
+            //         if (userProfileService.currentUser == null) {
+            //           Navigator.of(context).pushNamed(LoginScreen.routeId);
+            //         } else {
+            //           Navigator.of(context).pushNamed(ProfileScreen.routeId);
+            //         }
+            //       }
+            //       break;
+            //     case 2:
+            //       {
+            //         Navigator.of(context).pushNamed(SandboxScreen.routeId);
+            //       }
+            //   }
+            // }
+          },
+          items: widget.settings.bottomNavigation.buttons
+              .map<BottomNavigationBarItem>((settings) => BottomNavigationBarItem(
+                    icon: Icon(
+                      settings.icon,
+                      color: widget.screenIndex == 0 ? Theme.of(context).bottomNavigationBarTheme.selectedItemColor : Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+                    ),
+                    label: settings.label,
+                  ))
+              .toList()
+          // [
+          //   BottomNavigationBarItem(
+          //     icon: Icon(
+          //       Icons.home,
+          //       color: widget.screenIndex == 0 ? Colors.red : Colors.blue,
+          //     ),
+          //     label: 'Home',
+          //   ),
+          //   BottomNavigationBarItem(
+          //     icon: Icon(
+          //       Icons.person,
+          //       color: widget.screenIndex == 1 ? Colors.red : Colors.blue,
+          //     ),
+          //     label: 'My profile',
+          //   ),
+          //   BottomNavigationBarItem(
+          //     icon: Icon(
+          //       Icons.settings,
+          //       color: widget.screenIndex == 2 ? Colors.red : Colors.blue,
+          //     ),
+          //     label: 'Settings',
+          //   )
+          // ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-              color: widget.screenIndex == 1 ? Colors.red : Colors.blue,
-            ),
-            label: 'My profile',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.settings,
-              color: widget.screenIndex == 2 ? Colors.red : Colors.blue,
-            ),
-            label: 'Settings',
-          )
-        ],
-      ),
     );
   }
 }

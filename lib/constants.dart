@@ -1,7 +1,30 @@
+import 'package:briz/components/flupp/flupp_scaffold.dart';
+import 'package:briz/screens/home_screen.dart';
+import 'package:briz/screens/login_screen.dart';
+import 'package:briz/screens/profile_screen.dart';
+import 'package:briz/screens/sandbox_screen.dart';
 import 'package:flutter/material.dart';
 
+class Constants {
+  Constants._();
+  static const String defaultAppBarImagePath = 'assets/images/birds-eye-view-2133661_1920.jpg';
+  static const FluppBottomNavigationSettings bottomNavBarSettings = FluppBottomNavigationSettings(show: true, buttons: [
+    FluppBottomNavigationButtonSettings(
+      icon: Icons.home,
+      label: 'Home',
+      targetRoute: HomeScreen.routeId,
+    ),
+    FluppBottomNavigationButtonSettings(icon: Icons.person, label: 'Me', targetRoute: ProfileScreen.routeId, nonAuthenticatedTargetRoute: LoginScreen.routeId),
+    FluppBottomNavigationButtonSettings(
+      icon: Icons.settings,
+      label: 'Settings',
+      targetRoute: SandboxScreen.routeId,
+    ),
+  ]);
+}
+
 const kGoogleApiKey = "AIzaSyDbNvTaBVRmsKVKuPkpPUfPa9IEd6enFdY";
-const kDefaultAppBarImagePath = 'assets/images/birds-eye-view-2133661_1920.jpg';
+
 const kInputTextStyle = TextStyle(
   fontSize: 24,
   fontFamily: 'Comfortaa',
@@ -10,12 +33,12 @@ const kInputTextStyle = TextStyle(
 const kListCardTextStyle = TextStyle(
   fontSize: 20,
   fontFamily: 'Comfortaa',
-  color: Colors.white,
+  // color: Colors.white,
 );
 const kListCardSubtextStyle = TextStyle(
   fontSize: 15,
   fontFamily: 'Comfortaa',
-  color: Colors.white,
+  // color: Colors.white,
 );
 
 const kStandartTextStyle = TextStyle(
@@ -23,8 +46,8 @@ const kStandartTextStyle = TextStyle(
   fontFamily: 'Comfortaa',
 );
 const kTextInputBorder = UnderlineInputBorder(
-  borderSide: BorderSide(color: Colors.white),
-);
+    // borderSide: BorderSide(color: Colors.white),
+    );
 
 const kTitleTextStyle = TextStyle(fontFamily: 'SeaweedScript', fontSize: 32.0);
 const kListTitleTextStyle = TextStyle(

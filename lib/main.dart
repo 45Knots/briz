@@ -7,7 +7,6 @@ import 'package:briz/screens/sandbox_screen.dart';
 import 'package:briz/services/userprofile_service.dart';
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
-import 'package:hexcolor/hexcolor.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'firebase_options.dart';
