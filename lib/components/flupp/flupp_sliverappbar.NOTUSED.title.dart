@@ -1,4 +1,4 @@
-part of 'my_sliver_app_bar.dart';
+part of 'flupp_sliverappbar.dart';
 
 // class _DynamicFlexibleSpaceBarTitle extends StatefulWidget {
 //   @required

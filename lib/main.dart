@@ -1,3 +1,4 @@
+import 'package:briz/color_schemes/scheme1.dart';
 import 'package:briz/screens/cruiser_screen.dart';
 import 'package:briz/screens/home_screen.dart';
 import 'package:briz/screens/login_screen.dart';
@@ -35,8 +36,8 @@ class _BrizAppState extends State<BrizApp> {
       ],
       child: MaterialApp(
         title: "Briz",
-        theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: HexColor('#014EB8'), brightness: Brightness.dark)),
-        themeMode: ThemeMode.dark,
+        theme: ThemeData(colorScheme: lightColorScheme),
+        themeMode: ThemeMode.light,
         debugShowCheckedModeBanner: false,
         initialRoute: HomeScreen.routeId,
         routes: {

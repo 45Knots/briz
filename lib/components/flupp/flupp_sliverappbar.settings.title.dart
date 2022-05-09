@@ -1,7 +1,7 @@
-part of 'my_sliver_app_bar.dart';
+part of 'flupp_sliverappbar.dart';
 
-class MySliverAppBarTitleSettings {
-  const MySliverAppBarTitleSettings({
+class FluppSliverAppBarTitleSettings {
+  const FluppSliverAppBarTitleSettings({
     this.text = "",
     this.textStyle = kTitleTextStyle,
     this.alignment = Alignment.center,

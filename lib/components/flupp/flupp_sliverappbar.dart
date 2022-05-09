@@ -1,29 +1,35 @@
+import 'package:briz/components/scroll_effects.dart';
+import 'package:briz/components/my_avatar.dart';
+import 'package:briz/constants.dart';
 import 'package:extended_image/extended_image.dart';
 import "package:flutter/material.dart";
-import '../constants.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
-part 'my_sliver_app_bar.settings.title.dart';
-part 'my_sliver_app_bar.settings.image.dart';
-part 'my_sliver_app_bar.settings.avatar.dart';
-part 'my_sliver_app_bar.settings.dart';
-part 'my_sliver_app_bar.NOTUSED.title.dart';
+part 'flupp_sliverappbar.settings.title.dart';
+part 'flupp_sliverappbar.settings.image.dart';
+part 'flupp_sliverappbar.settings.avatar.dart';
+part 'flupp_sliverappbar.settings.dart';
+part 'flupp_sliverappbar.NOTUSED.title.dart';
 
-class MySliverAppBar extends StatefulWidget {
-  const MySliverAppBar({
+class FluppSliverAppBar extends StatefulWidget {
+  const FluppSliverAppBar({
     Key? key,
-    this.settings = const MySliverAppBarSettings(),
+    required this.scrollController,
+    this.settings = const FluppSliverAppBarSettings(),
   }) : super(key: key);
 
-  final MySliverAppBarSettings settings;
+  final FluppSliverAppBarSettings settings;
+  final ScrollController scrollController;
   @override
-  _MySliverAppBarState createState() => _MySliverAppBarState();
+  _FluppSliverAppBarState createState() => _FluppSliverAppBarState();
 }
 
-class _MySliverAppBarState extends State<MySliverAppBar> {
+class _FluppSliverAppBarState extends State<FluppSliverAppBar> {
   @override
   Widget build(BuildContext context) {
-    return SliverAppBar(
+    Widget _appBar = SliverAppBar(
       pinned: widget.settings.pinned,
+      // pinned: false,
       snap: widget.settings.snap,
       floating: widget.settings.floating,
       expandedHeight: (widget.settings.isCollaped ? widget.settings.collapsedHeight : widget.settings.expandedHeight),
@@ -62,13 +68,73 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
         },
       ),
     );
+
+    var avatar = SliverPositioned(
+        bottom: -25,
+        left: 10,
+        child: ScrollEffects(
+          fadeEffect: EffectParameters(
+            startAtOffset: 0,
+            stopAtOffset: widget.settings.expandedHeight - widget.settings.collapsedHeight,
+          ),
+          scaleEffect: ScaleEffectParameters(
+            alignment: Alignment.centerLeft,
+            startAtOffset: 0,
+            stopAtOffset: widget.settings.expandedHeight - widget.settings.collapsedHeight,
+            scaleFactor: 1.5,
+            type: ScaleType.shrink,
+          ),
+          scrollController: widget.scrollController,
+          child: MyAvatar(
+            imageUrl: widget.settings.image.path,
+          ),
+        ));
+
+    return MultiSliver(children: [
+      SliverStack(children: [SliverPositioned.fill(child: _appBar), avatar]),
+      _ss
+    ]);
+  }
+}
+
+var _ss = SliverPinnedHeader(child: _info);
+
+var _info = MyInfoBar2();
+
+class MyInfoBar2 extends StatelessWidget {
+  const MyInfoBar2({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.all(8),
+            height: 40,
+            color: Theme.of(context).backgroundColor,
+            child: Text('BBBBBB'),
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.all(8),
+          height: 40,
+          color: Theme.of(context).backgroundColor,
+          child: Text('AAAAAAA'),
+        ),
+      ],
+    );
   }
 }
 
 class MyImage extends StatefulWidget {
-  const MyImage({Key? key, this.settings = const MySliverAppBarImageSettings()}) : super(key: key);
+  const MyImage({Key? key, this.settings = const FluppSliverAppBarImageSettings()}) : super(key: key);
 
-  final MySliverAppBarImageSettings settings;
+  final FluppSliverAppBarImageSettings settings;
   @override
   State<MyImage> createState() => _MyImageState();
 }

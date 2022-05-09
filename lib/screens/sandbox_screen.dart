@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/dummy_sliver_list.dart';
-import '../components/my_scaffold.dart';
+import '../components/flupp/flupp_scaffold.dart';
 
 class SandboxScreen extends StatefulWidget {
   const SandboxScreen({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class _SandboxScreenState extends State<SandboxScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const MyScaffold(
+    return const FluppScaffold(
       screenIndex: 2,
       slivers: [
         // SliverToBoxAdapter(

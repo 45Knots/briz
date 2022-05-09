@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'package:briz/components/my_scaffold.dart';
-import 'package:briz/components/my_sliver_app_bar.dart';
+import 'package:briz/components/flupp/flupp_scaffold.dart';
+import 'package:briz/components/flupp/flupp_sliverappbar.dart';
 import 'package:briz/screens/profile_screen.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:briz/screens/home_screen.dart';
 import 'package:briz/services/userprofile_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -42,10 +41,10 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     var userProfileService = Provider.of<UserProfileService>(context);
-    return MyScaffold(
+    return FluppScaffold(
       screenIndex: 1,
-      settings: const MyScaffoldSettings(
-        appBarSettings: MySliverAppBarSettings(title: MySliverAppBarTitleSettings(text: "Briz")),
+      settings: const FluppScaffoldSettings(
+        appBarSettings: FluppSliverAppBarSettings(title: FluppSliverAppBarTitleSettings(text: "Briz")),
       ),
       slivers: [
         SliverToBoxAdapter(

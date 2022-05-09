@@ -1,7 +1,7 @@
-part of 'my_sliver_app_bar.dart';
+part of 'flupp_sliverappbar.dart';
 
-class MySliverAppBarImageSettings {
-  const MySliverAppBarImageSettings({
+class FluppSliverAppBarImageSettings {
+  const FluppSliverAppBarImageSettings({
     this.path = kDefaultAppBarImagePath,
     this.fit = BoxFit.cover,
     this.opacity = 0.5,

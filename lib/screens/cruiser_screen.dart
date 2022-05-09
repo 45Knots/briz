@@ -1,5 +1,5 @@
-import 'package:briz/components/my_scaffold.dart';
-import 'package:briz/components/my_sliver_app_bar.dart';
+import 'package:briz/components/flupp/flupp_scaffold.dart';
+import 'package:briz/components/flupp/flupp_sliverappbar.dart';
 import 'package:briz/constants.dart';
 import 'package:briz/models/cruiser.dart';
 import 'package:flutter/material.dart';
@@ -29,16 +29,16 @@ class CruiserScreen extends StatefulWidget {
 class _CruiserScreenState extends State<CruiserScreen> {
   @override
   Widget build(BuildContext context) {
-    return MyScaffold(
+    return FluppScaffold(
       screenIndex: -1,
-      settings: MyScaffoldSettings(
-        appBarSettings: MySliverAppBarSettings(
-          title: MySliverAppBarTitleSettings(
+      settings: FluppScaffoldSettings(
+        appBarSettings: FluppSliverAppBarSettings(
+          title: FluppSliverAppBarTitleSettings(
             text: widget.arguments.cruiser.title,
             textStyle: kListCardTextStyle,
             alignment: Alignment.bottomCenter,
           ),
-          image: MySliverAppBarImageSettings(
+          image: FluppSliverAppBarImageSettings(
             fit: BoxFit.cover,
             path: widget.arguments.cruiser.defaultImage,
             opacity: 1.0,

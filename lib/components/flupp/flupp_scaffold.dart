@@ -1,4 +1,4 @@
-import 'package:briz/components/my_sliver_app_bar.dart';
+import 'package:briz/components/flupp/flupp_sliverappbar.dart';
 import 'package:briz/screens/home_screen.dart';
 import 'package:briz/screens/login_screen.dart';
 import 'package:briz/screens/profile_screen.dart';
@@ -7,37 +7,46 @@ import 'package:briz/services/userprofile_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MyScaffoldSettings {
-  const MyScaffoldSettings({this.appBarSettings = const MySliverAppBarSettings(), this.showAppBar = true});
+part 'flupp_scaffold.settings.dart';
 
-  final MySliverAppBarSettings appBarSettings;
-  final bool showAppBar;
-}
-
-class MyScaffold extends StatefulWidget {
-  const MyScaffold({
+class FluppScaffold extends StatefulWidget {
+  const FluppScaffold({
     Key? key,
     required this.screenIndex,
     required this.slivers,
-    this.settings = const MyScaffoldSettings(),
+    this.settings = const FluppScaffoldSettings(),
   }) : super(
           key: key,
         );
 
   final int screenIndex;
   final List<Widget> slivers;
-  final MyScaffoldSettings settings;
+  final FluppScaffoldSettings settings;
 
   @override
-  State<MyScaffold> createState() => _MyScaffoldState();
+  State<FluppScaffold> createState() => _FluppScaffoldState();
 }
 
-class _MyScaffoldState extends State<MyScaffold> {
+class _FluppScaffoldState extends State<FluppScaffold> {
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController(initialScrollOffset: 1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
-        slivers: widget.settings.showAppBar ? [MySliverAppBar(settings: widget.settings.appBarSettings), ...widget.slivers] : widget.slivers,
+        controller: _scrollController,
+        slivers: widget.settings.showAppBar
+            ? [
+                FluppSliverAppBar(scrollController: _scrollController, settings: widget.settings.appBarSettings),
+                ...widget.slivers,
+              ]
+            : widget.slivers,
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: widget.screenIndex > -1 ? widget.screenIndex : 0, // this will be set when a new tab is tapped

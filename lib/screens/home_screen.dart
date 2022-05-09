@@ -1,6 +1,6 @@
 import 'package:briz/components/cruiser_card.dart';
-import 'package:briz/components/my_scaffold.dart';
-import 'package:briz/components/my_sliver_app_bar.dart';
+import 'package:briz/components/flupp/flupp_scaffold.dart';
+import 'package:briz/components/flupp/flupp_sliverappbar.dart';
 import 'package:briz/components/my_sliver_with_header.dart';
 import 'package:briz/models/cruiser.dart';
 import 'package:briz/services/cruiser_service.dart';
@@ -17,11 +17,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const MyScaffold(
+    return const FluppScaffold(
         screenIndex: 0,
-        settings: MyScaffoldSettings(
-          appBarSettings: MySliverAppBarSettings(
-            title: MySliverAppBarTitleSettings(
+        settings: FluppScaffoldSettings(
+          appBarSettings: FluppSliverAppBarSettings(
+            title: FluppSliverAppBarTitleSettings(
               text: "Briz",
             ),
           ),

@@ -1,9 +1,9 @@
-part of 'my_sliver_app_bar.dart';
+part of 'flupp_sliverappbar.dart';
 
-class MySliverAppBarSettings {
+class FluppSliverAppBarSettings {
   static const defaultExpandedHeight = 200.0;
 
-  const MySliverAppBarSettings({
+  const FluppSliverAppBarSettings({
     this.isCollaped = false,
     this.expandedHeight = defaultExpandedHeight,
     this.collapsedHeight = kToolbarHeight,
@@ -13,9 +13,9 @@ class MySliverAppBarSettings {
     this.floating = false,
     this.elevation = 0.0,
     this.scale = 2,
-    this.title = const MySliverAppBarTitleSettings(),
-    this.image = const MySliverAppBarImageSettings(),
-    this.avatar = const MySliverAppBarAvatarSettings(),
+    this.title = const FluppSliverAppBarTitleSettings(),
+    this.image = const FluppSliverAppBarImageSettings(),
+    this.avatar = const FluppSliverAppBarAvatarSettings(),
   });
 
   final bool isCollaped;
@@ -28,9 +28,9 @@ class MySliverAppBarSettings {
   final double elevation;
   final double scale;
 
-  final MySliverAppBarTitleSettings title;
-  final MySliverAppBarImageSettings image;
-  final MySliverAppBarAvatarSettings avatar;
+  final FluppSliverAppBarTitleSettings title;
+  final FluppSliverAppBarImageSettings image;
+  final FluppSliverAppBarAvatarSettings avatar;
 
   // static const MySliverAppBarSettings defaultSettings = MySliverAppBarSettings();
 }

@@ -1,7 +1,7 @@
-part of 'my_sliver_app_bar.dart';
+part of 'flupp_sliverappbar.dart';
 
-class MySliverAppBarAvatarSettings {
-  const MySliverAppBarAvatarSettings({
+class FluppSliverAppBarAvatarSettings {
+  const FluppSliverAppBarAvatarSettings({
     this.show = true,
     this.actions = const [],
     this.alignment = Alignment.bottomLeft,
