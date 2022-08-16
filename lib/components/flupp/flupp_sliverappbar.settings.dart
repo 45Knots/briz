@@ -17,6 +17,7 @@ class FluppSliverAppBarSettings {
     this.image = const FluppSliverAppBarImageSettings(),
     this.avatar = const FluppSliverAppBarAvatarSettings(),
     this.info = const FluppSliverAppBarInfoSettings(),
+    this.actions = const [],
   });
 
   final bool isCollaped;
@@ -28,6 +29,7 @@ class FluppSliverAppBarSettings {
   final bool floating;
   final double elevation;
   final double scale;
+  final List<Widget> actions;
 
   final FluppSliverAppBarTitleSettings title;
   final FluppSliverAppBarImageSettings image;

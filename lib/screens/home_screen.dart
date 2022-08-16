@@ -6,6 +6,8 @@ import 'package:briz/constants.dart';
 import 'package:briz/models/cruiser.dart';
 import 'package:briz/services/cruiser_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterfire_ui/auth.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -42,31 +44,27 @@ class CruiserList extends StatelessWidget {
       title: "Cruises near me",
       sticky: false,
       sliver: FutureBuilder<List<Cruiser>>(
-        future: CruiserService.readAll(),
+        future: CruiserDataService.readAll(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return SliverList(
-              delegate: SliverChildListDelegate(
-                [const Text("no data")],
+            return SliverToBoxAdapter(
+              child: SizedBox(
+                height: 500,
+                child: Center(
+                  child: LoadingAnimationWidget.waveDots(color: Theme.of(context).primaryColor, size: 100),
+                ),
               ),
             );
           } else {
             return SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
-                  while (index < 10) {
+                  while (index < snapshot.data!.length) {
                     return CruiserListItem(
-                      cruiser: snapshot.data![0],
+                      cruiser: snapshot.data![index],
                     );
                   }
                   return null;
-                  // if (snapshot.data!.length > index) {
-                  //   return CruiserListItem(
-                  //     cruiser: snapshot.data![index],
-                  //   );
-                  // } else {
-                  //   return null;
-                  // }
                 },
               ),
             );

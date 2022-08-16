@@ -1,6 +1,5 @@
 import 'package:briz/components/flupp/flupp_scaffold.dart';
 import 'package:briz/screens/home_screen.dart';
-import 'package:briz/screens/login_screen.dart';
 import 'package:briz/screens/profile_screen.dart';
 import 'package:briz/screens/sandbox_screen.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +7,19 @@ import 'package:flutter/material.dart';
 class Constants {
   Constants._();
   static const String defaultAppBarImagePath = 'assets/images/birds-eye-view-2133661_1920.jpg';
+  static const String defaultItemImagePath = 'assets/images/camera.png';
   static const FluppBottomNavigationSettings bottomNavBarSettings = FluppBottomNavigationSettings(show: true, buttons: [
     FluppBottomNavigationButtonSettings(
       icon: Icons.home,
       label: 'Home',
       targetRoute: HomeScreen.routeId,
     ),
-    FluppBottomNavigationButtonSettings(icon: Icons.person, label: 'Me', targetRoute: ProfileScreen.routeId, nonAuthenticatedTargetRoute: LoginScreen.routeId),
+    FluppBottomNavigationButtonSettings(
+      icon: Icons.person,
+      label: 'Me',
+      targetRoute: UserProfileScreen.routeId,
+      nonAuthenticatedTargetRoute: UserProfileScreen.routeId,
+    ),
     FluppBottomNavigationButtonSettings(
       icon: Icons.settings,
       label: 'Settings',
@@ -49,7 +54,10 @@ const kTextInputBorder = UnderlineInputBorder(
     // borderSide: BorderSide(color: Colors.white),
     );
 
-const kTitleTextStyle = TextStyle(fontFamily: 'SeaweedScript', fontSize: 32.0);
+const kTitleTextStyle = TextStyle(
+  fontFamily: 'SeaweedScript',
+  fontSize: 32.0,
+);
 const kListTitleTextStyle = TextStyle(
   fontFamily: 'Comfortaa',
   fontSize: 20.0,

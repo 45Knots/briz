@@ -1,4 +1,4 @@
-import 'package:extended_image/extended_image.dart';
+import 'package:briz/components/generic/network_or_asset_image.dart';
 import 'package:flutter/material.dart';
 
 class CardBoxDecoration extends BoxDecoration {
@@ -6,21 +6,11 @@ class CardBoxDecoration extends BoxDecoration {
   final double borderWidth;
   final Color borderColor;
 
-  CardBoxDecoration({
-    this.imagePath = "assets/images/camera.png",
-    this.borderWidth = 1,
-    this.borderColor = Colors.white54,
-  }) : super(
+  CardBoxDecoration({this.imagePath = "assets/images/camera.png", this.borderWidth = 1, this.borderColor = Colors.white})
+      : super(
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: imagePath.startsWith('assets/')
-                  ? ExtendedAssetImageProvider(
-                      imagePath,
-                    ) as ImageProvider
-                  : ExtendedNetworkImageProvider(
-                      imagePath,
-                      cache: true,
-                    ),
+              image: NetworkOrAssetImage.provider(imagePath),
             ),
             border: Border.all(color: borderColor, width: borderWidth),
             borderRadius: BorderRadius.circular(5));

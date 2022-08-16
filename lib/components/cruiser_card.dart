@@ -1,8 +1,8 @@
-import 'package:briz/constants.dart';
 import 'package:briz/custom_decorations.dart';
 import 'package:briz/models/cruiser.dart';
 import 'package:briz/screens/cruiser_screen.dart';
 import 'package:flutter/material.dart';
+import 'generic/card_info_bar.dart';
 
 class CruiserListItem extends StatelessWidget {
   const CruiserListItem({
@@ -13,49 +13,29 @@ class CruiserListItem extends StatelessWidget {
   final Cruiser cruiser;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: InkWell(
-        child: Container(
-          width: double.infinity,
-          height: 200.0,
-          alignment: Alignment.bottomLeft,
-          decoration: CardBoxDecoration(imagePath: cruiser.defaultImage),
+    return Container(
+      // color: Theme.of(context).backgroundColor.withOpacity(0.5),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: InkWell(
           child: Container(
             width: double.infinity,
-            height: 50.0,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                children: [
-                  Text(
-                    cruiser.title,
-                    style: kListCardTextStyle,
-                  ),
-                  Expanded(
-                      child: Container(
-                    alignment: Alignment.centerRight,
-                    child: const Text(
-                      'sss',
-                      style: kListCardSubtextStyle,
-                    ),
-                  ))
-                ],
-              ),
+            height: 200.0,
+            alignment: Alignment.bottomLeft,
+            decoration: CardBoxDecoration(
+              imagePath: cruiser.defaultImage,
+              borderWidth: 2,
+              borderColor: Theme.of(context).colorScheme.onPrimaryContainer,
             ),
-            decoration: BoxDecoration(
-              color: Colors.black12,
-              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(5.0), bottomRight: Radius.circular(5.0)),
-              border: Border.all(color: Colors.black12, width: 0.5),
-            ),
+            child: CardInfoBar(title: cruiser.title),
           ),
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              CruiserScreen.routeId,
+              arguments: CruiserScreenArguments(cruiser: cruiser),
+            );
+          },
         ),
-        onTap: () {
-          Navigator.of(context).pushNamed(
-            CruiserScreen.routeId,
-            arguments: CruiserScreenArguments(cruiser: cruiser),
-          );
-        },
       ),
     );
   }

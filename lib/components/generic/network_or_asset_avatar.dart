@@ -18,14 +18,14 @@ class NetworkOrAssetAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircularProfileAvatar(
       '',
+      radius: radius,
+      borderColor: Colors.white,
+      borderWidth: borderWidth,
       child: NetworkOrAssetImage(
         imagePathOrUrl: imagePathOrUrl,
         fit: BoxFit.cover,
         fallBackIcon: Icons.account_circle,
       ),
-      radius: radius,
-      borderColor: Theme.of(context).colorScheme.outline,
-      borderWidth: borderWidth,
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:briz/constants.dart';
 import 'package:flutter/material.dart';
 
 class MyListHeader extends StatelessWidget {
@@ -14,12 +13,25 @@ class MyListHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 20.0, left: 10.0, bottom: 10.0),
-      decoration: BoxDecoration(color: Theme.of(context).canvasColor),
-      child: Text(
-        title,
-        style: Theme.of(context).textTheme.headlineSmall,
-        textAlign: alignment,
+      padding: const EdgeInsets.only(top: 10.0, left: 12.0, bottom: 4.0),
+      decoration: BoxDecoration(color: Theme.of(context).backgroundColor, boxShadow: [
+        BoxShadow(
+          blurRadius: 10,
+          spreadRadius: 10,
+          blurStyle: BlurStyle.normal,
+          color: Theme.of(context).backgroundColor,
+        )
+      ]
+          //Theme.of(context).canvasColor),
+          ),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.black87),
+            textAlign: alignment,
+          ),
+        ],
       ),
     );
   }

@@ -24,6 +24,8 @@ class NetworkOrAssetImage extends StatefulWidget {
 
   @override
   State<NetworkOrAssetImage> createState() => _NetworkOrAssetImageState();
+
+  static provider(String imagePathOrUrl) => isURL(imagePathOrUrl) ? ExtendedNetworkImageProvider(imagePathOrUrl, cache: true) : ExtendedAssetImageProvider(imagePathOrUrl);
 }
 
 class _NetworkOrAssetImageState extends State<NetworkOrAssetImage> {
@@ -38,11 +40,11 @@ class _NetworkOrAssetImageState extends State<NetworkOrAssetImage> {
           )
         : widget.fallBackIcon != null
             ? FittedBox(
+                fit: widget.fit,
                 child: Icon(
                   widget.fallBackIcon,
                   color: widget.color?.withOpacity(widget.opacity),
                 ),
-                fit: widget.fit,
               )
             : const Placeholder();
     return widget.imagePathOrUrl == null || widget.imagePathOrUrl!.isEmpty

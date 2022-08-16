@@ -1,7 +1,9 @@
+import 'package:briz/components/generic/card_info_bar.dart';
 import 'package:briz/components/generic/network_or_asset_image.dart';
 import 'package:briz/components/generic/scroll_effects.dart';
 import 'package:briz/components/generic/network_or_asset_avatar.dart';
 import 'package:briz/constants.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import "package:flutter/material.dart";
 import 'package:sliver_tools/sliver_tools.dart';
 
@@ -28,7 +30,7 @@ class FluppSliverAppBar extends StatefulWidget {
 class _FluppSliverAppBarState extends State<FluppSliverAppBar> {
   @override
   Widget build(BuildContext context) {
-    Widget _appBar = SliverAppBar(
+    Widget appBar = SliverAppBar(
       pinned: widget.settings.pinned,
       snap: widget.settings.snap,
       floating: widget.settings.floating,
@@ -38,10 +40,25 @@ class _FluppSliverAppBarState extends State<FluppSliverAppBar> {
       elevation: widget.settings.elevation,
       forceElevated: false,
       primary: true,
+      actions: widget.settings.actions
+          .map<Widget>(
+            (e) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Ink(
+                width: 42,
+                decoration: const ShapeDecoration(
+                  shape: CircleBorder(),
+                  // color: Theme.of(context).shadowColor.withOpacity(0.5),
+                ),
+                child: e,
+              ),
+            ),
+          )
+          .toList(),
       flexibleSpace: LayoutBuilder(
         builder: (context, constraints) {
-          final FlexibleSpaceBarSettings? _settings = context.dependOnInheritedWidgetOfExactType();
-          bool isCollapsed = _settings != null && _settings.currentExtent == _settings.minExtent;
+          final FlexibleSpaceBarSettings? settings = context.dependOnInheritedWidgetOfExactType();
+          bool isCollapsed = settings != null && settings.currentExtent == settings.minExtent;
           double height = MediaQuery.of(context).size.height;
           return FlexibleSpaceBar(
             titlePadding: isCollapsed
@@ -51,21 +68,57 @@ class _FluppSliverAppBarState extends State<FluppSliverAppBar> {
                     : EdgeInsets.zero,
             centerTitle: false,
             expandedTitleScale: widget.settings.scale,
-            background: NetworkOrAssetImage(
-              imagePathOrUrl: widget.settings.image.path,
-              color: widget.settings.image.color,
-              fit: widget.settings.image.fit,
-              opacity: widget.settings.image.opacity,
-              fallBackImagePath: Constants.defaultAppBarImagePath,
-            ),
+            background: widget.settings.image.paths == null
+                ? NetworkOrAssetImage(
+                    imagePathOrUrl: widget.settings.image.path,
+                    color: widget.settings.image.color,
+                    fit: widget.settings.image.fit,
+                    opacity: widget.settings.image.opacity,
+                    fallBackImagePath: Constants.defaultAppBarImagePath,
+                  )
+                : CarouselSlider(
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      disableCenter: true,
+                      enlargeCenterPage: false,
+                      viewportFraction: 1,
+                    ),
+                    carouselController: CarouselController(),
+                    items: widget.settings.image.paths!
+                        .map((e) => Builder(
+                              builder: (context) => NetworkOrAssetImage(
+                                imagePathOrUrl: e,
+                                color: widget.settings.image.color,
+                                fit: widget.settings.image.fit,
+                                opacity: widget.settings.image.opacity,
+                                fallBackImagePath: Constants.defaultAppBarImagePath,
+                              ),
+                            ))
+                        .toList(),
+                  ),
             title: SizedBox(
+              width: double.infinity,
               height: (height / widget.settings.scale) * 0.25,
               child: Align(
                 alignment: isCollapsed ? Alignment.center : widget.settings.title.alignment,
-                child: Text(
-                  widget.settings.title.text,
-                  style: widget.settings.title.textStyle,
-                ),
+                child: isCollapsed
+                    ? Text(
+                        widget.settings.title.text,
+                        style: widget.settings.title.textStyle,
+                      )
+                    : Container(
+                        width: double.infinity,
+                        alignment: isCollapsed ? Alignment.center : widget.settings.title.alignment,
+                        height: widget.settings.title.textStyle.fontSize! * 2,
+                        color: widget.settings.title.backgroundColor,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            widget.settings.title.text,
+                            style: widget.settings.title.textStyle,
+                          ),
+                        ),
+                      ),
               ),
             ),
           );
@@ -100,18 +153,18 @@ class _FluppSliverAppBarState extends State<FluppSliverAppBar> {
           ),
         ));
 
-    Widget _infoBar = AppBar(
+    Widget infoBar = AppBar(
       automaticallyImplyLeading: false,
       toolbarHeight: kToolbarHeight / 2,
-      backgroundColor: Theme.of(context).canvasColor,
+      backgroundColor: Theme.of(context).backgroundColor,
       elevation: 0,
     );
 
-    List<Widget> _children = List<Widget>.empty(growable: true);
-    _children.add(widget.settings.avatar.show ? SliverStack(children: [SliverPositioned.fill(child: _appBar), avatar]) : _appBar);
+    List<Widget> children = List<Widget>.empty(growable: true);
+    children.add(widget.settings.avatar.show ? SliverStack(children: [SliverPositioned.fill(child: appBar), avatar]) : appBar);
     if (widget.settings.info.show) {
-      _children.add(_infoBar);
+      children.add(infoBar);
     }
-    return MultiSliver(children: _children);
+    return MultiSliver(children: children);
   }
 }
