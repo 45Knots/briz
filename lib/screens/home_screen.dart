@@ -6,7 +6,6 @@ import 'package:briz/constants.dart';
 import 'package:briz/models/cruiser.dart';
 import 'package:briz/services/cruiser_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterfire_ui/auth.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,16 +19,26 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const FluppScaffold(
+    return FluppScaffold(
         screenIndex: 0,
         settings: FluppScaffoldSettings(
             appBar: FluppSliverAppBarSettings(
-              title: FluppSliverAppBarTitleSettings(
+              title: const FluppSliverAppBarTitleSettings(
                 text: "Briz",
               ),
+              actions: [
+                IconButton(
+                  onPressed: () {},
+                  autofocus: false,
+                  padding: const EdgeInsets.only(bottom: 3, left: 1),
+                  icon: const Icon(Icons.search_outlined),
+                  // iconSize: 30,
+                  // color: Colors.white,
+                ),
+              ],
             ),
             bottomNavigation: Constants.bottomNavBarSettings),
-        slivers: [CruiserList()]);
+        slivers: const [CruiserList()]);
   }
 }
 

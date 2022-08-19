@@ -1,4 +1,3 @@
-import 'package:briz/components/generic/card_info_bar.dart';
 import 'package:briz/components/generic/network_or_asset_image.dart';
 import 'package:briz/components/generic/scroll_effects.dart';
 import 'package:briz/components/generic/network_or_asset_avatar.dart';
@@ -40,16 +39,21 @@ class _FluppSliverAppBarState extends State<FluppSliverAppBar> {
       elevation: widget.settings.elevation,
       forceElevated: false,
       primary: true,
+      automaticallyImplyLeading: true,
+      iconTheme: const IconThemeData(
+        color: Colors.white,
+        size: 32,
+      ),
       actions: widget.settings.actions
           .map<Widget>(
             (e) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Ink(
-                width: 42,
-                decoration: const ShapeDecoration(
-                  shape: CircleBorder(),
-                  // color: Theme.of(context).shadowColor.withOpacity(0.5),
-                ),
+                // width: 42,
+                // decoration: ShapeDecoration(
+                //   shape: CircleBorder(),
+                //   color: Theme.of(context).shadowColor.withOpacity(0.9),
+                // ),
                 child: e,
               ),
             ),
@@ -85,15 +89,17 @@ class _FluppSliverAppBarState extends State<FluppSliverAppBar> {
                     ),
                     carouselController: CarouselController(),
                     items: widget.settings.image.paths!
-                        .map((e) => Builder(
-                              builder: (context) => NetworkOrAssetImage(
-                                imagePathOrUrl: e,
-                                color: widget.settings.image.color,
-                                fit: widget.settings.image.fit,
-                                opacity: widget.settings.image.opacity,
-                                fallBackImagePath: Constants.defaultAppBarImagePath,
-                              ),
-                            ))
+                        .map(
+                          (e) => Builder(
+                            builder: (context) => NetworkOrAssetImage(
+                              imagePathOrUrl: e,
+                              color: widget.settings.image.color,
+                              fit: widget.settings.image.fit,
+                              opacity: widget.settings.image.opacity,
+                              fallBackImagePath: Constants.defaultAppBarImagePath,
+                            ),
+                          ),
+                        )
                         .toList(),
                   ),
             title: SizedBox(
