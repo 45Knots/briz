@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <resources>
     <string name="app_name">Briz</string>
     <string name="facebook_app_id">5152655478128706</string>
-    <string name="facebook_client_token">2fea76481bd036f349bf888de98f98ac</string>
-    <string name="fb_login_protocol_scheme">fb5152655478128706</string>
+               <string name="fb_login_protocol_scheme">fb5152655478128706</string>
 </resources>

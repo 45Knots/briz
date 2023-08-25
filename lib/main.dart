@@ -1,57 +1,197 @@
-import 'package:briz/color_schemes/scheme1.dart';
-import 'package:briz/screens/cruiser_screen.dart';
-import 'package:briz/screens/home_screen.dart';
-import 'package:briz/screens/profile_screen.dart';
-import 'package:briz/screens/sandbox_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import "package:flutter/material.dart";
-import 'package:flutterfire_ui/auth.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'auth/firebase_auth/firebase_user_provider.dart';
+import 'auth/firebase_auth/auth_util.dart';
 
-import 'firebase_options.dart';
+import 'backend/firebase/firebase_config.dart';
+import 'flutter_flow/flutter_flow_theme.dart';
+import 'flutter_flow/flutter_flow_util.dart';
+import 'flutter_flow/internationalization.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'flutter_flow/nav/nav.dart';
+import 'index.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  usePathUrlStrategy();
+  await initFirebase();
 
-  FlutterFireUIAuth.configureProviders([
-    const EmailProviderConfiguration(),
-    const FacebookProviderConfiguration(clientId: '5152655478128706'),
-  ]);
+  await FlutterFlowTheme.initialize();
 
-  runApp(const BrizApp());
+  final appState = FFAppState(); // Initialize FFAppState
+  await appState.initializePersistedState();
+
+  await initializeFirebaseRemoteConfig();
+
+  runApp(ChangeNotifierProvider(
+    create: (context) => appState,
+    child: MyApp(),
+  ));
 }
 
-class BrizApp extends StatefulWidget {
-  const BrizApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+
+  static _MyAppState of(BuildContext context) =>
+      context.findAncestorStateOfType<_MyAppState>()!;
+}
+
+class _MyAppState extends State<MyApp> {
+  Locale? _locale;
+  ThemeMode _themeMode = FlutterFlowTheme.themeMode;
+
+  late Stream<BaseAuthUser> userStream;
+
+  late AppStateNotifier _appStateNotifier;
+  late GoRouter _router;
+
+  final authUserSub = authenticatedUserStream.listen((_) {});
 
   @override
-  State<StatefulWidget> createState() => _BrizAppState();
-}
+  void initState() {
+    super.initState();
+    _appStateNotifier = AppStateNotifier.instance;
+    _router = createRouter(_appStateNotifier);
+    userStream = brizFirebaseUserStream()
+      ..listen((user) => _appStateNotifier.update(user));
+    jwtTokenStream.listen((_) {});
+    Future.delayed(
+      Duration(milliseconds: 1000),
+      () => _appStateNotifier.stopShowingSplashImage(),
+    );
+  }
 
-class _BrizAppState extends State<BrizApp> {
+  @override
+  void dispose() {
+    authUserSub.cancel();
+
+    super.dispose();
+  }
+
+  void setLocale(String language) {
+    setState(() => _locale = createLocale(language));
+  }
+
+  void setThemeMode(ThemeMode mode) => setState(() {
+        _themeMode = mode;
+        FlutterFlowTheme.saveThemeMode(mode);
+      });
+
   @override
   Widget build(BuildContext context) {
-    // return MultiProvider(
-    //   providers: [
-    //     Provider(create: (context) => UserProfileService()),
-    //   ],
-    return MaterialApp(
-      title: "Briz",
-      theme: ThemeData(colorScheme: lightColorScheme),
-      themeMode: ThemeMode.light,
-      debugShowCheckedModeBanner: false,
-      initialRoute: HomeScreen.routeId,
-      routes: {
-        HomeScreen.routeId: (context) => const HomeScreen(),
-        CruiserScreen.routeId: (context) => CruiserScreen(
-              arguments: ModalRoute.of(context)!.settings.arguments as CruiserScreenArguments,
+    return MaterialApp.router(
+      title: 'Yot!',
+      localizationsDelegates: [
+        FFLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      locale: _locale,
+      supportedLocales: const [
+        Locale('en'),
+        Locale('el'),
+      ],
+      theme: ThemeData(
+        brightness: Brightness.light,
+        scrollbarTheme: ScrollbarThemeData(),
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        scrollbarTheme: ScrollbarThemeData(),
+      ),
+      themeMode: _themeMode,
+      routerConfig: _router,
+    );
+  }
+}
+
+class NavBarPage extends StatefulWidget {
+  NavBarPage({Key? key, this.initialPage, this.page}) : super(key: key);
+
+  final String? initialPage;
+  final Widget? page;
+
+  @override
+  _NavBarPageState createState() => _NavBarPageState();
+}
+
+/// This is the private State class that goes with NavBarPage.
+class _NavBarPageState extends State<NavBarPage> {
+  String _currentPageName = 'HomePage';
+  late Widget? _currentPage;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentPageName = widget.initialPage ?? _currentPageName;
+    _currentPage = widget.page;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final tabs = {
+      'HomePage': HomePageWidget(),
+      'MyProfile': MyProfileWidget(),
+      'MyFleet': MyFleetWidget(),
+    };
+    final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
+
+    return Scaffold(
+      body: _currentPage ?? tabs[_currentPageName],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
+        onTap: (i) => setState(() {
+          _currentPage = null;
+          _currentPageName = tabs.keys.toList()[i];
+        }),
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        selectedItemColor: FlutterFlowTheme.of(context).alternate,
+        unselectedItemColor: FlutterFlowTheme.of(context).tertiary,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_outlined,
+              size: 24.0,
             ),
-        UserProfileScreen.routeId: (context) => const UserProfileScreen(),
-        SandboxScreen.routeId: (context) => const SandboxScreen(),
-      },
+            label: FFLocalizations.of(context).getText(
+              '2jfjpnwy' /* Home */,
+            ),
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
+              size: 24.0,
+            ),
+            label: FFLocalizations.of(context).getText(
+              's1mwf9vy' /* My Profile */,
+            ),
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.directions_boat,
+              size: 24.0,
+            ),
+            label: FFLocalizations.of(context).getText(
+              '9kncbfsu' /* My Fleet */,
+            ),
+            tooltip: '',
+          )
+        ],
+      ),
     );
   }
 }
