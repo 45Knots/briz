@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "794066304083-474lvk01g2ouhkmbphovnlntj5edq31h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.briz.app",
+            "certificate_hash": "4d1c8e8da94bcd8fa2efac57ef0b1e00bddbd3d6"
+          }
+        },
+        {
           "client_id": "794066304083-lmhi2nhkb1m2vmqntcligj4bj7c2005q.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

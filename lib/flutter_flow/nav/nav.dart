@@ -80,13 +80,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? NavBarPage() : LoginWidget(),
+          appStateNotifier.loggedIn ? NavBarPage() : ConnectWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? NavBarPage() : LoginWidget(),
+              appStateNotifier.loggedIn ? NavBarPage() : ConnectWidget(),
           routes: [
             FFRoute(
               name: 'HomePage',
@@ -97,20 +97,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   : HomePageWidget(),
             ),
             FFRoute(
-              name: 'Login',
-              path: 'login',
-              builder: (context, params) => LoginWidget(),
-            ),
-            FFRoute(
-              name: 'Register',
-              path: 'register',
-              builder: (context, params) => RegisterWidget(),
-            ),
-            FFRoute(
-              name: 'OnboardingCopy',
-              path: 'onboarding2',
-              requireAuth: true,
-              builder: (context, params) => OnboardingCopyWidget(),
+              name: 'Connect',
+              path: 'connect',
+              builder: (context, params) => ConnectWidget(),
             ),
             FFRoute(
               name: 'MyFleet',
@@ -147,10 +136,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'LoginCopy',
-              path: 'loginCopy',
-              requireAuth: true,
-              builder: (context, params) => LoginCopyWidget(),
+              name: 'ValidateSMS',
+              path: 'validateSMS',
+              builder: (context, params) => ValidateSMSWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -319,7 +307,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/login';
+            return '/connect';
           }
           return null;
         },

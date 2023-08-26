@@ -107,7 +107,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                 return;
               }
 
-              context.goNamedAuth('Login', context.mounted);
+              context.goNamedAuth('Connect', context.mounted);
             },
           ),
         ],

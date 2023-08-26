@@ -132,7 +132,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'el': '',
     },
   },
-  // Login
+  // Connect
   {
     'dvxcjlqa': {
       'en': 'Welcome to Briz!',
@@ -142,151 +142,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Continue with Facebook',
       'el': '',
     },
+    '6ndtz978': {
+      'en': 'Phone Number',
+      'el': '',
+    },
+    'tq4d199i': {
+      'en': 'Button',
+      'el': '',
+    },
     'fvwu14qv': {
       'en': 'Home',
-      'el': '',
-    },
-  },
-  // Register
-  {
-    'ch3r2t5w': {
-      'en': 'Welcome to Yot!',
-      'el': '',
-    },
-    'gwj61h4p': {
-      'en': '',
-      'el': '',
-    },
-    'ixr3g4d6': {
-      'en': 'Email Address',
-      'el': '',
-    },
-    '2ssc16rc': {
-      'en': 'Enter your email here...',
-      'el': '',
-    },
-    '6tlqdmlv': {
-      'en': 'Password',
-      'el': '',
-    },
-    'cjny9m2f': {
-      'en': 'Enter your email here...',
-      'el': '',
-    },
-    't2b0szfj': {
-      'en': 'Confirm Password',
-      'el': '',
-    },
-    'igt5uvv1': {
-      'en': 'Enter your email here...',
-      'el': '',
-    },
-    '7aijmuc5': {
-      'en': 'Create Account',
-      'el': '',
-    },
-    'ft8wkh1a': {
-      'en': 'Already have an account?',
-      'el': '',
-    },
-    'ppaxbvld': {
-      'en': 'Log In',
-      'el': '',
-    },
-    '2bov1tts': {
-      'en': 'Login',
-      'el': '',
-    },
-  },
-  // OnboardingCopy
-  {
-    'aycbhn6u': {
-      'en': 'Your pride and Joy!',
-      'el': '',
-    },
-    'iwattgrw': {
-      'en': 'Sailing boat',
-      'el': '',
-    },
-    'xcx01ym0': {
-      'en': 'Cruiser',
-      'el': '',
-    },
-    'w60luj4l': {
-      'en': 'What\'s the type of your boat?',
-      'el': '',
-    },
-    'ucy33uqq': {
-      'en': 'Name',
-      'el': '',
-    },
-    'v9rjxt00': {
-      'en': 'The name of your boat',
-      'el': '',
-    },
-    '90sj8fyj': {
-      'en': 'Model',
-      'el': '',
-    },
-    '151gtuxj': {
-      'en': 'Model and year',
-      'el': '',
-    },
-    'ahrh35im': {
-      'en': 'Cabins',
-      'el': '',
-    },
-    'bjs0rtog': {
-      'en': 'Capacity',
-      'el': '',
-    },
-    'usryfkw7': {
-      'en': 'Length',
-      'el': '',
-    },
-    '1psgc0mj': {
-      'en': 'Description',
-      'el': '',
-    },
-    '92ez0dna': {
-      'en':
-          'Some description, characteristics, things you want to point out, etc',
-      'el': '',
-    },
-    'ebtsm2li': {
-      'en': 'Update',
-      'el': '',
-    },
-    '2em2uc2r': {
-      'en': 'Field is required',
-      'el': '',
-    },
-    'xnbpxixl': {
-      'en': 'Please choose an option from the dropdown',
-      'el': '',
-    },
-    'pnwjun52': {
-      'en': 'Field is required',
-      'el': '',
-    },
-    'yh5n9n8l': {
-      'en': 'Please choose an option from the dropdown',
-      'el': '',
-    },
-    '852z2oh6': {
-      'en': 'Field is required',
-      'el': '',
-    },
-    '17rdcryt': {
-      'en': 'Please choose an option from the dropdown',
-      'el': '',
-    },
-    'a57wphuc': {
-      'en': 'The gallery',
-      'el': '',
-    },
-    'chhxpovn': {
-      'en': 'Login',
       'el': '',
     },
   },
@@ -342,49 +207,21 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'el': '',
     },
   },
-  // LoginCopy
+  // ValidateSMS
   {
-    '325fimpt': {
-      'en': 'Welcome Back!',
+    'l6b5lrmc': {
+      'en': 'Code',
       'el': '',
     },
-    'zaqkk670': {
-      'en': 'Use the form below to access your account.',
+    'nd784hfh': {
+      'en': 'Validate',
       'el': '',
     },
-    'viiy9b9o': {
-      'en': 'Email Address',
+    'rv6idjpx': {
+      'en': 'Page Title',
       'el': '',
     },
-    '6l34qvjx': {
-      'en': 'Enter your email here...',
-      'el': '',
-    },
-    'ws4gzcuz': {
-      'en': 'Password',
-      'el': '',
-    },
-    'zuowmjad': {
-      'en': 'Enter your email here...',
-      'el': '',
-    },
-    'ypijlswh': {
-      'en': 'Forgot Password?',
-      'el': '',
-    },
-    'zojmjrrd': {
-      'en': 'Login',
-      'el': '',
-    },
-    '1i3fyzuw': {
-      'en': 'Don\'t have an account?',
-      'el': '',
-    },
-    'dvdcjd00': {
-      'en': 'Create Account',
-      'el': '',
-    },
-    'w6jgznip': {
+    'b7s5k7xr': {
       'en': 'Home',
       'el': '',
     },
