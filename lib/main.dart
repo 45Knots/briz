@@ -88,7 +88,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Yot!',
+      title: 'Briz!',
       localizationsDelegates: [
         FFLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -126,7 +126,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPageName = 'HomePage';
+  String _currentPageName = 'Home';
   late Widget? _currentPage;
 
   @override
@@ -139,9 +139,8 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'HomePage': HomePageWidget(),
       'MyProfile': MyProfileWidget(),
-      'MyFleet': MyFleetWidget(),
+      'Home': HomeWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -160,16 +159,6 @@ class _NavBarPageState extends State<NavBarPage> {
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_outlined,
-              size: 24.0,
-            ),
-            label: FFLocalizations.of(context).getText(
-              '2jfjpnwy' /* Home */,
-            ),
-            tooltip: '',
-          ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.person,

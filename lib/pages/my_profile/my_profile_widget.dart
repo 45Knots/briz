@@ -279,7 +279,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                         displayName: _model.yourNameController.text,
                       ));
 
-                      context.pushNamed('HomePage');
+                      context.pushNamed('Home');
                     },
                     text: FFLocalizations.of(context).getText(
                       'h4zzgqo0' /* Update */,

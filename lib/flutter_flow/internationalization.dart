@@ -105,33 +105,6 @@ Locale createLocale(String language) => language.contains('_')
     : Locale(language);
 
 final kTranslationsMap = <Map<String, Map<String, String>>>[
-  // HomePage
-  {
-    '8bg5zkdg': {
-      'en': 'Fleet oulook',
-      'el': '',
-    },
-    '7e6a4n8q': {
-      'en': '23%',
-      'el': '',
-    },
-    '4gbqovwd': {
-      'en': 'Fleet booked this week',
-      'el': '',
-    },
-    'bwtbd945': {
-      'en': '93%',
-      'el': '',
-    },
-    'gk50u1cm': {
-      'en': 'Fleet booked this season',
-      'el': '',
-    },
-    '2jfjpnwy': {
-      'en': 'Home',
-      'el': '',
-    },
-  },
   // Connect
   {
     'dvxcjlqa': {
@@ -142,12 +115,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Continue with Facebook',
       'el': '',
     },
-    'zi3flhcy': {
-      'en': 'Phone Number',
+    '12l5jrpe': {
+      'en': 'or connect with your mobile phone',
       'el': '',
     },
-    'o5pa2hxm': {
-      'en': 'Button',
+    '5lge6xsv': {
+      'en': 'Label here...',
+      'el': '',
+    },
+    'uyfafdlk': {
+      'en': 'Get code',
       'el': '',
     },
     'fvwu14qv': {
@@ -155,12 +132,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'el': '',
     },
   },
-  // MyFleet
+  // Home
   {
-    's6ufqn8z': {
-      'en': 'My Fleet',
-      'el': '',
-    },
     '9kncbfsu': {
       'en': 'My Fleet',
       'el': '',
@@ -207,21 +180,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'el': '',
     },
   },
-  // ValidateSMS
+  // VerifySMS
   {
-    '4qgkp68j': {
-      'en': 'Code',
+    '795kjcse': {
+      'en': 'Label here...',
       'el': '',
     },
-    'u7u3ltmc': {
+    'f0dvg5ei': {
       'en': 'Validate',
       'el': '',
     },
-    'ezp0rdgu': {
-      'en': 'Page Title',
-      'el': '',
-    },
-    '5jhy5ol3': {
+    'mankr403': {
       'en': 'Home',
       'el': '',
     },

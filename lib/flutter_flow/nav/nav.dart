@@ -89,25 +89,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? NavBarPage() : ConnectWidget(),
           routes: [
             FFRoute(
-              name: 'HomePage',
-              path: 'homePage',
-              requireAuth: true,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'HomePage')
-                  : HomePageWidget(),
-            ),
-            FFRoute(
               name: 'Connect',
               path: 'connect',
               builder: (context, params) => ConnectWidget(),
             ),
             FFRoute(
-              name: 'MyFleet',
-              path: 'myFleet',
+              name: 'Home',
+              path: 'home',
               requireAuth: true,
               builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'MyFleet')
-                  : MyFleetWidget(),
+                  ? NavBarPage(initialPage: 'Home')
+                  : HomeWidget(),
             ),
             FFRoute(
               name: 'MyProfile',
@@ -136,9 +128,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'ValidateSMS',
-              path: 'validateSMS',
-              builder: (context, params) => ValidateSMSWidget(),
+              name: 'VerifySMS',
+              path: 'verify',
+              builder: (context, params) => VerifySMSWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

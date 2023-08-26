@@ -3,35 +3,31 @@ import '/components/logo_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
-import 'connect_model.dart';
-export 'connect_model.dart';
+import 'verify_s_m_s_model.dart';
+export 'verify_s_m_s_model.dart';
 
-class ConnectWidget extends StatefulWidget {
-  const ConnectWidget({Key? key}) : super(key: key);
+class VerifySMSWidget extends StatefulWidget {
+  const VerifySMSWidget({Key? key}) : super(key: key);
 
   @override
-  _ConnectWidgetState createState() => _ConnectWidgetState();
+  _VerifySMSWidgetState createState() => _VerifySMSWidgetState();
 }
 
-class _ConnectWidgetState extends State<ConnectWidget> {
-  late ConnectModel _model;
+class _VerifySMSWidgetState extends State<VerifySMSWidget> {
+  late VerifySMSModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ConnectModel());
+    _model = createModel(context, () => VerifySMSModel());
 
     _model.textController ??= TextEditingController();
-    authManager.handlePhoneAuthStateChanges(context);
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -74,67 +70,6 @@ class _ConnectWidgetState extends State<ConnectWidget> {
                         updateCallback: () => setState(() {}),
                         child: LogoWidget(),
                       ),
-                      Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 10.0, 10.0, 10.0),
-                          child: AutoSizeText(
-                            FFLocalizations.of(context).getText(
-                              'dvxcjlqa' /* Welcome to Briz! */,
-                            ),
-                            style: FlutterFlowTheme.of(context).displaySmall,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 10.0, 10.0, 10.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            GoRouter.of(context).prepareAuthEvent();
-                            final user =
-                                await authManager.signInWithFacebook(context);
-                            if (user == null) {
-                              return;
-                            }
-
-                            context.goNamedAuth('Home', context.mounted);
-                          },
-                          text: FFLocalizations.of(context).getText(
-                            'cpmwajsv' /* Continue with Facebook */,
-                          ),
-                          icon: FaIcon(
-                            FontAwesomeIcons.facebook,
-                          ),
-                          options: FFButtonOptions(
-                            height: 40.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).facebookBlue,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Comfortaa',
-                                  color: Colors.white,
-                                ),
-                            elevation: 3.0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        FFLocalizations.of(context).getText(
-                          '12l5jrpe' /* or connect with your mobile ph... */,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium,
-                      ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
                             10.0, 10.0, 10.0, 10.0),
@@ -145,9 +80,12 @@ class _ConnectWidgetState extends State<ConnectWidget> {
                           decoration: InputDecoration(
                             isDense: true,
                             labelText: FFLocalizations.of(context).getText(
-                              '5lge6xsv' /* Label here... */,
+                              '795kjcse' /* Label here... */,
                             ),
-                            labelStyle: FlutterFlowTheme.of(context).bodyMedium,
+                            labelStyle: TextStyle(
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              fontWeight: FontWeight.w100,
+                            ),
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -179,39 +117,36 @@ class _ConnectWidgetState extends State<ConnectWidget> {
                             ),
                           ),
                           style: FlutterFlowTheme.of(context).bodyMedium,
+                          keyboardType: TextInputType.number,
                           validator: _model.textControllerValidator
                               .asValidator(context),
-                          inputFormatters: [_model.textFieldMask],
                         ),
                       ),
                       FFButtonWidget(
                         onPressed: () async {
-                          final phoneNumberVal = _model.textController.text;
-                          if (phoneNumberVal == null ||
-                              phoneNumberVal.isEmpty ||
-                              !phoneNumberVal.startsWith('+')) {
+                          GoRouter.of(context).prepareAuthEvent();
+                          final smsCodeVal = _model.textController.text;
+                          if (smsCodeVal == null || smsCodeVal.isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text(
-                                    'Phone Number is required and has to start with +.'),
+                                content: Text('Enter SMS verification code.'),
                               ),
                             );
                             return;
                           }
-                          await authManager.beginPhoneAuth(
+                          final phoneVerifiedUser =
+                              await authManager.verifySmsCode(
                             context: context,
-                            phoneNumber: phoneNumberVal,
-                            onCodeSent: (context) async {
-                              context.goNamedAuth(
-                                'VerifySMS',
-                                context.mounted,
-                                ignoreRedirect: true,
-                              );
-                            },
+                            smsCode: smsCodeVal,
                           );
+                          if (phoneVerifiedUser == null) {
+                            return;
+                          }
+
+                          context.goNamedAuth('Home', context.mounted);
                         },
                         text: FFLocalizations.of(context).getText(
-                          'uyfafdlk' /* Get code */,
+                          'f0dvg5ei' /* Validate */,
                         ),
                         options: FFButtonOptions(
                           height: 40.0,

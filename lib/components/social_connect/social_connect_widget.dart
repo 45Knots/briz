@@ -89,7 +89,7 @@ class _SocialConnectWidgetState extends State<SocialConnectWidget> {
                       return;
                     }
 
-                    context.goNamedAuth('HomePage', context.mounted);
+                    context.goNamedAuth('Home', context.mounted);
                   },
                   child: Container(
                     width: 50.0,
@@ -125,7 +125,7 @@ class _SocialConnectWidgetState extends State<SocialConnectWidget> {
                     return;
                   }
 
-                  context.goNamedAuth('HomePage', context.mounted);
+                  context.goNamedAuth('Home', context.mounted);
                 },
                 child: Container(
                   width: 50.0,
@@ -175,7 +175,7 @@ class _SocialConnectWidgetState extends State<SocialConnectWidget> {
                     return;
                   }
 
-                  context.goNamedAuth('HomePage', context.mounted);
+                  context.goNamedAuth('Home', context.mounted);
                 },
                 child: Container(
                   width: 50.0,
