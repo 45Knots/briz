@@ -142,11 +142,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Continue with Facebook',
       'el': '',
     },
-    '6ndtz978': {
+    'zi3flhcy': {
       'en': 'Phone Number',
       'el': '',
     },
-    'tq4d199i': {
+    'o5pa2hxm': {
       'en': 'Button',
       'el': '',
     },
@@ -209,19 +209,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // ValidateSMS
   {
-    'l6b5lrmc': {
+    '4qgkp68j': {
       'en': 'Code',
       'el': '',
     },
-    'nd784hfh': {
+    'u7u3ltmc': {
       'en': 'Validate',
       'el': '',
     },
-    'rv6idjpx': {
+    'ezp0rdgu': {
       'en': 'Page Title',
       'el': '',
     },
-    'b7s5k7xr': {
+    '5jhy5ol3': {
       'en': 'Home',
       'el': '',
     },

@@ -167,7 +167,7 @@ class _ConnectWidgetState extends State<ConnectWidget> {
                           obscureText: false,
                           decoration: InputDecoration(
                             labelText: FFLocalizations.of(context).getText(
-                              '6ndtz978' /* Phone Number */,
+                              'zi3flhcy' /* Phone Number */,
                             ),
                             labelStyle:
                                 FlutterFlowTheme.of(context).labelMedium,
@@ -233,7 +233,7 @@ class _ConnectWidgetState extends State<ConnectWidget> {
                           );
                         },
                         text: FFLocalizations.of(context).getText(
-                          'tq4d199i' /* Button */,
+                          'o5pa2hxm' /* Button */,
                         ),
                         options: FFButtonOptions(
                           height: 40.0,

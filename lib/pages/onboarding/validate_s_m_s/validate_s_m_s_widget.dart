@@ -66,7 +66,7 @@ class _ValidateSMSWidgetState extends State<ValidateSMSWidget> {
           ),
           title: Text(
             FFLocalizations.of(context).getText(
-              'rv6idjpx' /* Page Title */,
+              'ezp0rdgu' /* Page Title */,
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Comfortaa',
@@ -91,7 +91,7 @@ class _ValidateSMSWidgetState extends State<ValidateSMSWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: FFLocalizations.of(context).getText(
-                      'l6b5lrmc' /* Code */,
+                      '4qgkp68j' /* Code */,
                     ),
                     labelStyle: FlutterFlowTheme.of(context).labelMedium,
                     hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -152,7 +152,7 @@ class _ValidateSMSWidgetState extends State<ValidateSMSWidget> {
                   context.goNamedAuth('HomePage', context.mounted);
                 },
                 text: FFLocalizations.of(context).getText(
-                  'nd784hfh' /* Validate */,
+                  'u7u3ltmc' /* Validate */,
                 ),
                 options: FFButtonOptions(
                   height: 40.0,
